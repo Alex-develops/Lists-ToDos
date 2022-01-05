@@ -1,4 +1,3 @@
-
 const express = require("express");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
@@ -21,7 +20,7 @@ const Item = mongoose.model("Item", itemsSchema);
 
 
  const item1 = new Item({
-  name: "Set your goals below!"
+  name: "Be grateful!"
  });
 
  const defaultItems = [item1];
@@ -32,8 +31,12 @@ const listSchema = {
 };
 
 const List = mongoose.model("List", listSchema);
+let dateObj = new Date();
+let month = dateObj.getUTCMonth() + 1; //months from 1-12
+let day = dateObj.getUTCDate();
+let year = dateObj.getUTCFullYear();
 
-
+let currentDate = `${day}/${month}/${year}`
 app.get("/", (req, res)=> {
 
   Item.find({}, (err, foundItems) =>{
@@ -48,7 +51,7 @@ app.get("/", (req, res)=> {
       });
       res.redirect("/");
     } else {
-      res.render("list", {listTitle: "Today", newListItems: foundItems});
+      res.render("list", {listTitle: currentDate, newListItems: foundItems});
     }
   });
 
@@ -87,8 +90,11 @@ app.post("/", function(req, res){
   const item = new Item({
     name: itemName
   });
-
-  if (listName === "Today"){
+  //do not add an empty field to the task list
+  if (itemName===""){
+     return;
+  }
+  if (listName === currentDate){
     item.save();
     res.redirect("/");
   } else {
@@ -104,7 +110,7 @@ app.post("/delete", (req, res) => {
   const checkedItemId = req.body.checkbox;
   const listName = req.body.listName;
 
-  if (listName === "Today") {
+  if (listName === currentDate) {
     Item.findByIdAndRemove(checkedItemId, (err) => {
       if (!err) {
         console.log("Successfully deleted checked item.");
@@ -122,9 +128,7 @@ app.post("/delete", (req, res) => {
 
 });
 
-app.get("/about", (req, res) =>{
-  res.render("about");
-});
+
 
 app.listen(5000, ()=>{
   console.log("Server started on port 5000");

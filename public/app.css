@@ -6,6 +6,12 @@ html {
     font-family: 'helvetica neue';
 }
 
+body {
+    min-height: 100%;
+    padding-bottom: 60px;
+    /* Height of the footer */
+}
+
 h1 {
     color: #fff;
     padding: 10px;
@@ -20,7 +26,7 @@ h1 {
 }
 
 #heading {
-    background-color: #4d996f;
+    background-color: #fba350;
     text-align: center;
 }
 
@@ -37,7 +43,7 @@ h1 {
 
 input:checked+p {
     text-decoration: line-through;
-    text-decoration-color: #4d996f;
+    text-decoration-color: #fba350;
 }
 
 input[type="checkbox"] {
@@ -49,7 +55,7 @@ p {
     padding: 20px;
     font-size: 20px;
     font-weight: 200;
-    color: #4d996f;
+    color: grey;
 }
 
 form.item {
@@ -62,7 +68,7 @@ button {
     width: 50px;
     border-radius: 50%;
     border-color: transparent;
-    background-color: #4d996f;
+    background-color: #fba350;
     color: #fff;
     font-size: 30px;
     padding-bottom: 6px;
@@ -78,15 +84,16 @@ input[type="text"] {
     font-size: 20px;
     font-weight: 200;
     width: 313px;
+
 }
 
 input[type="text"]:focus {
     outline: none;
-    box-shadow: inset 0 -3px 0 0 #4d996f;
+    box-shadow: inset 0 -3px 0 0 #fba350;
 }
 
 ::placeholder {
-    color: grey;
+    color: #fba350;
     opacity: 1;
 }
 
@@ -94,4 +101,11 @@ footer {
     color: white;
     color: rgba(0, 0, 0, 0.5);
     text-align: center;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+    /* Height of the footer */
+
+
 }
